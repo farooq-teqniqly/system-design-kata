@@ -8,12 +8,12 @@ namespace EdgeDevice;
 /// <summary>
 /// Represents the entry point of the application.
 /// </summary>
-class Program
+public class Program
 {
     /// <summary>
     /// The main method of the application.
     /// </summary>
-    static async Task Main()
+    public static async Task Main()
     {
         try
         {

@@ -1,0 +1,16 @@
+services:
+  edge-device:
+    image: system-design-kata-edge-device:0.0.1
+    build:
+      context: .
+      dockerfile: EdgeDevice.dockerfile
+    environment:
+      - ServiceBus__ConnectionString
+      - ServiceBus__TopicName
+    stdin_open: true
+    tty: true
+    networks:
+      - system-network
+networks:
+  system-network:
+    driver: bridge
