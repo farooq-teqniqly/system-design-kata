@@ -23,7 +23,7 @@ jobs:
         
     - name: Push image to ACR
       run: |
-        docker system-design-kata-edge-device:0.0.1 systemdesignkataacr.azurecr.io/system-design-kata-edge-device:0.0.1
+        docker tag system-design-kata-edge-device:0.0.1 systemdesignkataacr.azurecr.io/system-design-kata-edge-device:0.0.1
         docker push systemdesignkataacr.azurecr.io/system-design-kata-edge-device:0.0.1
 
     # # Deploy to Azure Container Instances
