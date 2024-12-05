@@ -21,6 +21,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{584AB1
 		docker\EdgeDevice.dockerfile = docker\EdgeDevice.dockerfile
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{E86DC96B-0834-4530-93C8-5929E315C8FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{5CD34623-E855-4C48-A9A6-240061016117}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\deploy.yaml = ..\.github\workflows\deploy.yaml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +45,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{5CD34623-E855-4C48-A9A6-240061016117} = {E86DC96B-0834-4530-93C8-5929E315C8FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D5D0F546-8649-41D7-B0D4-06C6DAFD280F}

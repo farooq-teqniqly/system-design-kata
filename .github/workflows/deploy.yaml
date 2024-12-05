@@ -1,0 +1,40 @@
+name: Build and Deploy to Azure Container Instances
+
+on:
+ workflow_dispatch
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      
+    - name: Login to Azure
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        
+    - name: Build Docker image
+      run: |
+        docker build -f ./be/docker/EdgeDevice.dockerfile -t system-design-kata-edge-device:0.0.1 .
+        
+    - name: Push image to ACR
+      run: |
+        docker system-design-kata-edge-device:0.0.1 systemdesignkataacr.azurecr.io/system-design-kata-edge-device:0.0.1
+        docker push systemdesignkataacr.azurecr.io/system-design-kata-edge-device:0.0.1
+
+    # # Deploy to Azure Container Instances
+    # - name: Deploy to Azure Container Instances
+    #   run: |
+    #     az container create \
+    #       --resource-group MyResourceGroup \
+    #       --name my-container-instance \
+    #       --image MyRegistryName.azurecr.io/yourapp:latest \
+    #       --registry-login-server MyRegistryName.azurecr.io \
+    #       --registry-username ${{ secrets.ACR_USERNAME }} \
+    #       --registry-password ${{ secrets.ACR_PASSWORD }} \
+    #       --cpu 1 \
+    #       --memory 1 \
+    #       --port 80
