@@ -13,7 +13,6 @@ public class MessageProducer<TMessage> : IMessageProducer<TMessage>
 {
     private readonly ServiceBusSender _sender;
     private readonly ILogger<MessageProducer<TMessage>> _logger;
-    private readonly Random _random = new Random();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="MessageProducer{TMessage}"/> class.
