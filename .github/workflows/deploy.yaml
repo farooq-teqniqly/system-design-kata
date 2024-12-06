@@ -32,7 +32,6 @@ jobs:
     - name: Set the target AKS cluster
       uses: Azure/aks-set-context@v4
       with:
-              creds: '${{ secrets.AZURE_CREDENTIALS }}'
               cluster-name: ${{ secrets.AKS_CLUSTER_NAME }}
               resource-group:  ${{ secrets.AKS_RESOURCE_GROUP }}
 
