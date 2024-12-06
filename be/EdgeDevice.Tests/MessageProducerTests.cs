@@ -2,15 +2,18 @@ using Azure.Messaging.ServiceBus;
 using Microsoft.Extensions.Logging;
 using NSubstitute;
 using System.Text.Json;
+using Contracts;
 using FluentAssertions;
 
 namespace EdgeDevice.Tests;
 
 public class MessageProducerTests
 {
-    public class MockMessage
+    public class MockMessage : IDeviceMessage
     {
         public int Id { get; set; }
+        public required string DeviceId { get; set; }
+        public string MessageType { get; set; } = "mock";
     }
 
     [Fact]
@@ -19,11 +22,11 @@ public class MessageProducerTests
         // Arrange
         var mockSender = Substitute.For<ServiceBusSender>();
         var mockLogger = Substitute.For<ILogger<MessageProducer<MockMessage>>>();
-        
+
         var producer = new MessageProducer<MockMessage>(mockSender, mockLogger);
         var cts = new CancellationTokenSource();
 
-        var message = new MockMessage { Id = 100 };
+        var message = new MockMessage { Id = 100, DeviceId = "device-100" };
 
         ServiceBusMessage capturedMessage = null!;
 
@@ -43,5 +46,7 @@ public class MessageProducerTests
         var deserializedMessage = JsonSerializer.Deserialize<MockMessage>(messageBody);
 
         deserializedMessage!.Id.Should().Be(message.Id);
+        deserializedMessage!.DeviceId.Should().Be(message.DeviceId);
+        deserializedMessage!.MessageType.Should().Be(message.MessageType);
     }
 }

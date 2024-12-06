@@ -27,41 +27,41 @@ jobs:
         docker build -f ./be/docker/EdgeDevice.dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/system-design-kata-edge-device:${{ github.sha }} .
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/system-design-kata-edge-device:${{ github.sha }}
 
-    - uses: azure/setup-kubectl@v4
+    # - uses: azure/setup-kubectl@v4
   
-    - name: Set the target AKS cluster
-      uses: Azure/aks-set-context@v4
-      with:
-              cluster-name: ${{ secrets.AKS_CLUSTER_NAME }}
-              resource-group:  ${{ secrets.AKS_RESOURCE_GROUP }}
+    # - name: Set the target AKS cluster
+    #   uses: Azure/aks-set-context@v4
+    #   with:
+    #           cluster-name: ${{ secrets.AKS_CLUSTER_NAME }}
+    #           resource-group:  ${{ secrets.AKS_RESOURCE_GROUP }}
 
-    - name: Create ACR secrets
-      uses: Azure/k8s-create-secret@v4
-      with:
-              container-registry-url: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-              container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
-              container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
-              secret-name: github-workflow-secret
+    # - name: Create ACR secrets
+    #   uses: Azure/k8s-create-secret@v4
+    #   with:
+    #           container-registry-url: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+    #           container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
+    #           container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+    #           secret-name: github-workflow-secret
 
-    - name: Create deployment secrets
-      uses: Azure/k8s-create-secret@v4
-      with:
-              namespace: 'default'
-              secret-type: 'generic'
-              secret-name: system-design-kata-secret
-              data: |
-                {
-                    "ServiceBus__ConnectionString": "${{ secrets.SERVICE_BUS_CONNECTION_STRING }}",
-                    "ServiceBus__TopicName": "${{ secrets.SERVICE_BUS_TOPIC_NAME }}"
-                }
+    # - name: Create deployment secrets
+    #   uses: Azure/k8s-create-secret@v4
+    #   with:
+    #           namespace: 'default'
+    #           secret-type: 'generic'
+    #           secret-name: system-design-kata-secret
+    #           data: |
+    #             {
+    #                 "ServiceBus__ConnectionString": "${{ secrets.SERVICE_BUS_CONNECTION_STRING }}",
+    #                 "ServiceBus__TopicName": "${{ secrets.SERVICE_BUS_TOPIC_NAME }}"
+    #             }
 
-    - name: Deploy to AKS
-      uses: Azure/k8s-deploy@v5
-      with:
-              action: deploy
-              manifests: |
-                 ./k8s/deploy.yml
-              images: |
-                 ${{ secrets.REGISTRY_LOGIN_SERVER }}/system-design-kata-edge-device:${{ github.sha }}
-              imagepullsecrets: |
-                 github-workflow-secret
+    # - name: Deploy to AKS
+    #   uses: Azure/k8s-deploy@v5
+    #   with:
+    #           action: deploy
+    #           manifests: |
+    #              ./k8s/deploy.yml
+    #           images: |
+    #              ${{ secrets.REGISTRY_LOGIN_SERVER }}/system-design-kata-edge-device:${{ github.sha }}
+    #           imagepullsecrets: |
+    #              github-workflow-secret

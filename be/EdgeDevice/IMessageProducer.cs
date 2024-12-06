@@ -1,9 +1,11 @@
+using Contracts;
+
 namespace EdgeDevice;
 /// <summary>
 /// Represents a message producer that can send messages of type TMessage.
 /// </summary>
 /// <typeparam name="TMessage">The type of the message to be sent.</typeparam>
-public interface IMessageProducer<in TMessage>
+public interface IMessageProducer<in TMessage> where TMessage : IDeviceMessage
 {
     /// <summary>
     /// Sends a message asynchronously.

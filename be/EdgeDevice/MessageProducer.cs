@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.Json;
 using Azure.Messaging.ServiceBus;
+using Contracts;
 using Microsoft.Extensions.Logging;
 
 namespace EdgeDevice;
@@ -9,7 +10,7 @@ namespace EdgeDevice;
 /// Represents a message producer that sends messages to a Service Bus.
 /// </summary>
 /// <typeparam name="TMessage">The type of the message to send.</typeparam>
-public class MessageProducer<TMessage> : IMessageProducer<TMessage>
+public class MessageProducer<TMessage> : IMessageProducer<TMessage> where TMessage : IDeviceMessage
 {
     private readonly ServiceBusSender _sender;
     private readonly ILogger<MessageProducer<TMessage>> _logger;

@@ -1,4 +1,5 @@
 using Azure.Messaging.ServiceBus;
+using Contracts;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Serilog;
@@ -71,7 +72,7 @@ public class Program
                         };
 
                         await producer.SendMessageAsync(message, cts.Token);
-                        Log.Debug($"{deviceId} sent message of type {typeof(TemperatureMessage)}");
+                        Log.Debug("message sent: {@message}", message);
                         Log.Debug($"waiting for {sendInterval}ms...");
                         await Task.Delay(sendInterval, cts.Token);
                     }
