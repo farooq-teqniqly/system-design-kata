@@ -14,7 +14,7 @@ spec:
       nodeSelector:
         kubernetes.io/os: linux
       containers:
-        - image: systemdesignkataacr.azurecr.io/system-design-kata-edge-device:3e192cda72225982c33c2fe81b8d6b6cf7fb982a
+        - image: systemdesignkataacr.azurecr.io/system-design-kata-edge-device:b7aaa88c4db73aeeb56dde9c2cc57ba0222264f2
           name: edge-device
           env:
             - name: ServiceBus__ConnectionString
