@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: system-design-kata
+spec:
+  selector:
+    matchLabels:
+      app: system-design-kata
+  template:
+    metadata:
+      labels:
+        app: system-design-kata
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+      containers:
+        - image: systemdesignkataacr.azurecr.io/system-design-kata-edge-device:3e192cda72225982c33c2fe81b8d6b6cf7fb982a
+          name: edge-device
+          env:
+            - name: ServiceBus__ConnectionString
+              valueFrom:
+                secretKeyRef:
+                  name: system-design-kata-secret
+                  key: ServiceBus__ConnectionString
+            - name: ServiceBus__TopicName
+              valueFrom:
+                secretKeyRef:
+                  name: system-design-kata-secret
+                  key: ServiceBus__TopicName
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi

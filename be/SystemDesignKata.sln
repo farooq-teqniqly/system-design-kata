@@ -19,6 +19,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{584AB1
 		docker\.env = docker\.env
 		docker\docker-compose.yaml = docker\docker-compose.yaml
 		docker\EdgeDevice.dockerfile = docker\EdgeDevice.dockerfile
+		k8s\secret.yaml = k8s\secret.yaml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{E86DC96B-0834-4530-93C8-5929E315C8FB}"
@@ -26,6 +27,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{5CD34623-E855-4C48-A9A6-240061016117}"
 	ProjectSection(SolutionItems) = preProject
 		..\.github\workflows\deploy.yaml = ..\.github\workflows\deploy.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{6DB0EBCE-4DA4-49A7-8BF2-AF8DE3F92BCC}"
+	ProjectSection(SolutionItems) = preProject
+		k8s\deploy.yaml = k8s\deploy.yaml
 	EndProjectSection
 EndProject
 Global
