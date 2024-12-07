@@ -17,7 +17,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
         allow-no-subscriptions: true
         
-    - name: Build and push image
+    - name: Build and push EDGE DEVICE image
       uses: azure/docker-login@v2
       with:
         login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
@@ -26,6 +26,16 @@ jobs:
     - run: |
         docker build -f ./be/docker/EdgeDevice.dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/system-design-kata-edge-device:${{ github.sha }} .
         docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/system-design-kata-edge-device:${{ github.sha }}
+
+    - name: Build and push MESSAGE PROCESSOR image
+      uses: azure/docker-login@v2
+      with:
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+        docker build -f ./be/docker/MessageProcessor.dockerfile -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/system-design-kata-message-processor:${{ github.sha }} .
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/system-design-kata-message-processor:${{ github.sha }}
 
     # - uses: azure/setup-kubectl@v4
   
