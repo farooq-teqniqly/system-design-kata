@@ -34,6 +34,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "k8s", "k8s", "{6DB0EBCE-4DA4-49A7-8BF2-AF8DE3F92BCC}"
 	ProjectSection(SolutionItems) = preProject
 		k8s\deploy.yaml = k8s\deploy.yaml
+		k8s\secret.yaml = k8s\secret.yaml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{D44DD87F-F5E5-4DA5-BE97-827F6CB916E7}"
