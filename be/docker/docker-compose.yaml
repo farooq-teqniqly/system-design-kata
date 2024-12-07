@@ -11,6 +11,19 @@ services:
     tty: true
     networks:
       - system-network
+  message-processor:
+    image: system-design-kata-message-processor:0.0.1
+    build:
+      context: .
+      dockerfile: MessageProcessor.dockerfile
+    environment:
+      - ServiceBus__ConnectionString
+      - ServiceBus__TopicName
+      - ServiceBus__SubscriptionName
+    stdin_open: true
+    tty: true
+    networks:
+      - system-network
 networks:
   system-network:
     driver: bridge
