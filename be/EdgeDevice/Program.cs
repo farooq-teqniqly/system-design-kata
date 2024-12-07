@@ -72,7 +72,6 @@ public class Program
                         };
 
                         await producer.SendMessageAsync(message, cts.Token);
-                        Log.Debug("message sent: {@message}", message);
                         Log.Debug($"waiting for {sendInterval}ms...");
                         await Task.Delay(sendInterval, cts.Token);
                     }

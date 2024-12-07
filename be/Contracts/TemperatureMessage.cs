@@ -12,7 +12,15 @@ public class TemperatureMessage : IDeviceMessage
     /// </summary>
     public string MessageType { get; set; } = "temperature";
 
+    /// <summary>
+    /// Gets or sets the version of the message.
+    /// </summary>
     public int Version { get; set; } = 1;
+
+    /// <summary>
+    /// Gets or sets the timestamp of the message.
+    /// </summary>
+    public DateTimeOffset Timestamp { get; set; } = DateTimeOffset.UtcNow;
 
     /// <summary>
     /// Gets or sets the temperature value.

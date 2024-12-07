@@ -41,11 +41,12 @@ public class MessageProducer<TMessage> : IMessageProducer<TMessage> where TMessa
 
         var messageBody = JsonSerializer.Serialize(message);
         var messageBytes = Encoding.UTF8.GetBytes(messageBody);
-        var sbMessage = new ServiceBusMessage(messageBytes) { ContentType = "application/json" };
+        var sbMessage = new ServiceBusMessage(messageBytes) { ContentType = "application/json", MessageId = Guid.NewGuid().ToString("D") };
 
         try
         {
             await _sender.SendMessageAsync(sbMessage, ctx);
+            _logger.LogDebug("Sent message @{message} with body @{body}", sbMessage, messageBody);
         }
         catch (Exception ex)
         {

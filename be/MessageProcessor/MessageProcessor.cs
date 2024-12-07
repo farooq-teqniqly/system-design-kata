@@ -27,11 +27,9 @@ public class MessageProcessor : IMessageProcessor
     /// <returns>A task that represents the asynchronous operation.</returns>
     public Task ProcessMessageAsync(ServiceBusReceivedMessage message, CancellationToken ctx = default)
     {
-        _logger.LogDebug("Received message @{message} with body @{body}", message, message.Body);
+        _logger.LogDebug("Received message @{message} with body @{body} and enqueue time @{enqueueTime}", message, message.Body, message.EnqueuedTime);
 
-        var body = message.Body.ToString();
-
-        _logger.LogDebug("Message processed: {body}", body);
+        var _ = message.Body.ToString();
 
         return Task.CompletedTask;
     }

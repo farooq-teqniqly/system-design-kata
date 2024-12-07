@@ -15,6 +15,7 @@ public class MessageProducerTests
         public required string DeviceId { get; set; }
         public string MessageType { get; set; } = "mock";
         public int Version { get; set; } = 1;
+        public DateTimeOffset Timestamp { get; set; } = DateTimeOffset.UtcNow;
     }
 
     [Fact]
@@ -42,6 +43,11 @@ public class MessageProducerTests
         await mockSender.Received(1)
             .SendMessageAsync(Arg.Any<ServiceBusMessage>(), Arg.Any<CancellationToken>());
 
+        // Assert the message id was added
+        var messageIdValid = Guid.TryParse(capturedMessage.MessageId, out var _);
+
+        messageIdValid.Should().BeTrue();
+
         // Assert the message sent was JSON serialized
         var messageBody = capturedMessage!.Body.ToArray();
         var deserializedMessage = JsonSerializer.Deserialize<MockMessage>(messageBody);
@@ -50,5 +56,6 @@ public class MessageProducerTests
         deserializedMessage!.DeviceId.Should().Be(message.DeviceId);
         deserializedMessage!.MessageType.Should().Be(message.MessageType);
         deserializedMessage!.Version.Should().Be(message.Version);
+        deserializedMessage!.Timestamp.CompareTo(DateTimeOffset.UtcNow).Should().Be(-1);
     }
 }
