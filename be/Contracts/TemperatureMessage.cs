@@ -12,6 +12,8 @@ public class TemperatureMessage : IDeviceMessage
     /// </summary>
     public string MessageType { get; set; } = "temperature";
 
+    public int Version { get; set; } = 1;
+
     /// <summary>
     /// Gets or sets the temperature value.
     /// </summary>

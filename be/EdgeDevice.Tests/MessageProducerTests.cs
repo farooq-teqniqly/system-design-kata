@@ -14,6 +14,7 @@ public class MessageProducerTests
         public int Id { get; set; }
         public required string DeviceId { get; set; }
         public string MessageType { get; set; } = "mock";
+        public int Version { get; set; } = 1;
     }
 
     [Fact]
@@ -48,5 +49,6 @@ public class MessageProducerTests
         deserializedMessage!.Id.Should().Be(message.Id);
         deserializedMessage!.DeviceId.Should().Be(message.DeviceId);
         deserializedMessage!.MessageType.Should().Be(message.MessageType);
+        deserializedMessage!.Version.Should().Be(message.Version);
     }
 }
