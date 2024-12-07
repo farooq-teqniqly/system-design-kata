@@ -14,7 +14,7 @@ spec:
       nodeSelector:
         kubernetes.io/os: linux
       containers:
-        - image: systemdesignkataacr.azurecr.io/system-design-kata-edge-device:0e814b80af79c45f73223e3a6c5d129cceab825e
+        - image: systemdesignkataacr.azurecr.io/system-design-kata-edge-device:21927d0394a3040ad376b2a5d614b5280806787b
           name: edge-device
           env:
             - name: ServiceBus__ConnectionString
@@ -34,7 +34,7 @@ spec:
             limits:
               cpu: 250m
               memory: 256Mi
-        - image: systemdesignkataacr.azurecr.io/system-design-kata-message-processor:0e814b80af79c45f73223e3a6c5d129cceab825e
+        - image: systemdesignkataacr.azurecr.io/system-design-kata-message-processor:21927d0394a3040ad376b2a5d614b5280806787b
           name: message-processor
           env:
             - name: ServiceBus__ConnectionString
