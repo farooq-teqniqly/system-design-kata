@@ -26,4 +26,9 @@ public class TemperatureMessage : IDeviceMessage
     /// Gets or sets the temperature value.
     /// </summary>
     public double Value { get; set; }
+
+    /// <summary>
+    /// Gets or sets the unit of the temperature value.
+    /// </summary>
+    public char Unit { get; set; }
 }

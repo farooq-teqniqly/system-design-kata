@@ -11,6 +11,7 @@ namespace EdgeDevice;
 /// </summary>
 public class Program
 {
+    private static readonly char[] _temperatureUnits = ['f', 'c'];
     /// <summary>
     /// The main method of the application.
     /// </summary>
@@ -64,11 +65,13 @@ public class Program
                     for (var i = 0; i < numberOfSensors; i++)
                     {
                         var deviceId = $"sensor-temp-{i + 1}";
+                        var unit = _temperatureUnits[random.Next(_temperatureUnits.Length)];
 
                         var message = new TemperatureMessage
                         {
                             DeviceId = deviceId,
-                            Value = Math.Round(random.NextDouble() * 80, 2)
+                            Value = GenerateRandomTemperature(unit, random),
+                            Unit = unit
                         };
 
                         await producer.SendMessageAsync(message, cts.Token);
@@ -84,5 +87,27 @@ public class Program
             Log.Error(exception, "an error occurred");
         }
 
+    }
+
+    private static double GenerateRandomTemperature(char unit, Random random)
+    {
+        int min;
+        int max;
+
+        switch (unit)
+        {
+            case 'c':
+                min = 15;
+                max = 27;
+                break;
+            case 'f':
+                min = 60;
+                max = 80;
+                break;
+            default:
+                throw new ArgumentException("invalid unit", nameof(unit));
+        }
+
+        return Math.Round(random.Next(min, max) + random.NextDouble(), 1);
     }
 }
